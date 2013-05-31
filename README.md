@@ -1,5 +1,5 @@
-os-config-applier
-=================
+os-apply-config
+===============
 
 Apply configuration from cloud metadata.
 
@@ -21,7 +21,7 @@ connection = mysql://keystone:foobar@127.0.0.1/keystone
 
 Just pass it the path to a directory tree of templates:
 ```
-os-config-applier -t /home/me/my_templates
+os-apply-config -t /home/me/my_templates
 ```
 
 # Templates
@@ -61,7 +61,7 @@ Configuration requiring logic is expressed in executable templates.
 
 An executable template is a script which accepts configuration as a json string on standard in, and writes a config file to standard out.
 
-The script should exit non-zero if it encounters a problem, so that os-config-applier knows what's up.
+The script should exit non-zero if it encounters a problem, so that os-apply-config knows what's up.
 
 The output of the script will be written to the path corresponding to the executable template's path in the template tree.
 
@@ -96,11 +96,11 @@ puts Mustache.render(template, params)
 # Quick Start
 ```bash
 # install it
-sudo pip install -U git+git://github.com/tripleo/os-config-applier.git
+sudo pip install -U git+git://github.com/tripleo/os-apply-config.git
 
 # grab example templates
 git clone git://github.com/tripleo/openstack-config-templates /tmp/config
 
 # run it
-os-config-applier -t /tmp/config/templates/ -m /tmp/config/cfn-init-data.example -o /tmp/config_output
+os-apply-config -t /tmp/config/templates/ -m /tmp/config/cfn-init-data.example -o /tmp/config_output
 ```

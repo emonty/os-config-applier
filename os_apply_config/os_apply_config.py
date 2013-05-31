@@ -27,8 +27,8 @@ from config_exception import ConfigException
 from renderers import JsonRenderer
 from value_types import ensure_type
 
-TEMPLATES_DIR = os.environ.get('OS_CONFIG_APPLIER_TEMPLATES',
-                               '/opt/stack/os-config-applier/templates')
+TEMPLATES_DIR = os.environ.get('OS_APPLY_CONFIG_TEMPLATES',
+                               '/opt/stack/os-apply-config/templates')
 
 
 def install_config(config_path, template_root,
@@ -227,8 +227,8 @@ DATE_FORMAT = '%Y/%m/%d %I:%M:%S %p'
 def add_handler(logger, handler):
     handler.setFormatter(logging.Formatter(LOG_FORMAT, datefmt=DATE_FORMAT))
     logger.addHandler(handler)
-logger = logging.getLogger('os-config-applier')
+logger = logging.getLogger('os-apply-config')
 logger.setLevel(logging.INFO)
 add_handler(logger, logging.StreamHandler())
 if os.geteuid() == 0:
-    add_handler(logger, logging.FileHandler('/var/log/os-config-applier.log'))
+    add_handler(logger, logging.FileHandler('/var/log/os-apply-config.log'))
